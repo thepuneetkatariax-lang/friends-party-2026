@@ -131,6 +131,12 @@
             color: #666;
         }
 
+        .coupon-message {
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 
@@ -157,7 +163,12 @@
             <p>📍 <b>Venue:</b> Decide after group discussion</p>
 
             <p>💰 <b>Registration Fee:</b> ₹6 per person</p>
-<p>💵 <b>Party Contribution:</b> ₹200 per person — Please bring it with you.</p>
+
+            <p>
+                💵 <b>Party Contribution:</b>
+                ₹200 per person — Please bring it with you.
+            </p>
+
         </div>
 
         <h2>🎟️ Party Registration</h2>
@@ -209,9 +220,29 @@
 
         </select>
 
+
+        <!-- COUPON -->
+
+        <label>🎟️ Coupon Code (Optional)</label>
+
+        <input
+            type="text"
+            id="coupon"
+            placeholder="Enter coupon code"
+            oninput="checkCoupon()"
+        >
+
+        <div
+            id="couponMessage"
+            class="coupon-message">
+        </div>
+
+
         <!-- PAYMENT -->
 
-        <div class="payment">
+        <div
+            class="payment"
+            id="paymentSection">
 
             <h2>💳 Pay Registration Fee</h2>
 
@@ -240,20 +271,34 @@
 
         </div>
 
-        <label>🔢 UTR / Transaction ID</label>
 
-        <input
-            type="text"
-            id="utr"
-            placeholder="Enter payment transaction ID"
-        >
+        <div id="utrSection">
 
-        <button onclick="registerParty()">
+            <label>🔢 UTR / Transaction ID</label>
+
+            <input
+                type="text"
+                id="utr"
+                placeholder="Enter payment transaction ID"
+            >
+
+        </div>
+
+
+        <button
+            id="registerButton"
+            onclick="registerParty()">
+
             🎟️ REGISTER NOW — ₹6
+
         </button>
 
-        <p class="small">
+        <p
+            class="small"
+            id="paymentNote">
+
             Please make the payment before submitting the registration.
+
         </p>
 
     </div>
@@ -261,7 +306,9 @@
 
     <!-- SUCCESS PAGE -->
 
-    <div class="success" id="success">
+    <div
+        class="success"
+        id="success">
 
         <div class="success-icon">
             🎊
@@ -296,8 +343,12 @@
             📍 Venue will be decided after group discussion.
         </p>
 
-        <p>
+        <p id="successFee">
             💰 Registration Fee: ₹6 per person
+        </p>
+
+        <p>
+            💵 Party Contribution: ₹200 per person
         </p>
 
         <p class="small">
@@ -311,76 +362,227 @@
 
 <script>
 
+
+function checkCoupon() {
+
+    let coupon =
+        document.getElementById("coupon")
+        .value
+        .trim()
+        .toUpperCase();
+
+    let paymentSection =
+        document.getElementById("paymentSection");
+
+    let utrSection =
+        document.getElementById("utrSection");
+
+    let couponMessage =
+        document.getElementById("couponMessage");
+
+    let registerButton =
+        document.getElementById("registerButton");
+
+    let paymentNote =
+        document.getElementById("paymentNote");
+
+
+    if (coupon === "#VIP") {
+
+        paymentSection.style.display = "none";
+
+        utrSection.style.display = "none";
+
+        couponMessage.innerText =
+            "🎉 VIP Coupon Applied! Registration is FREE.";
+
+        couponMessage.style.color = "green";
+
+        registerButton.innerText =
+            "🎟️ REGISTER NOW — FREE";
+
+        paymentNote.innerText =
+            "VIP registration is free. No payment required.";
+
+    } else {
+
+        paymentSection.style.display = "block";
+
+        utrSection.style.display = "block";
+
+        couponMessage.innerText = "";
+
+        registerButton.innerText =
+            "🎟️ REGISTER NOW — ₹6";
+
+        paymentNote.innerText =
+            "Please make the payment before submitting the registration.";
+
+    }
+
+}
+
+
 function registerParty() {
 
-    let name = document.getElementById("name").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let people = document.getElementById("people").value;
-    let food = document.getElementById("food").value;
-    let utr = document.getElementById("utr").value.trim();
+    let name =
+        document.getElementById("name")
+        .value
+        .trim();
+
+    let phone =
+        document.getElementById("phone")
+        .value
+        .trim();
+
+    let people =
+        document.getElementById("people")
+        .value;
+
+    let food =
+        document.getElementById("food")
+        .value;
+
+    let coupon =
+        document.getElementById("coupon")
+        .value
+        .trim()
+        .toUpperCase();
+
+    let utr =
+        document.getElementById("utr")
+        .value
+        .trim();
+
 
     if (name === "") {
+
         alert("Please enter your name.");
+
         return;
+
     }
+
 
     if (phone === "") {
+
         alert("Please enter your mobile number.");
+
         return;
+
     }
+
 
     if (people === "") {
+
         alert("Please select number of people.");
+
         return;
+
     }
 
-    if (utr === "") {
+
+    /*
+       UTR is required only
+       when coupon is NOT #VIP
+    */
+
+    if (coupon !== "#VIP" && utr === "") {
+
         alert("Please enter your UTR / Transaction ID.");
+
         return;
+
     }
+
 
     let randomNumber =
-        Math.floor(100000 + Math.random() * 900000);
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        );
+
 
     let registrationID =
         "FP2026-" + randomNumber;
 
-   
-    let scriptURL = "https://script.google.com/macros/s/AKfycbzVFVwY4TBkch5_Kc4dnIimr8tlYebL856FvryB_Tjj-FzOIINioQxLs4unLdxSuBKOHg/exec";
+
+    let scriptURL =
+        "https://script.google.com/macros/s/AKfycbzVFVwY4TBkch5_Kc4dnIimr8tlYebL856FvryB_Tjj-FzOIINioQxLs4unLdxSuBKOHg/exec";
+
 
     fetch(scriptURL, {
 
         method: "POST",
 
-    body: JSON.stringify({
-    action: "register",
-    name: name,
-    phone: phone,
-    people: people,
-    food: food,
-    utr: utr,
-    registrationID: registrationID
-})        
+        body: JSON.stringify({
+
+            action: "register",
+
+            name: name,
+
+            phone: phone,
+
+            people: people,
+
+            food: food,
+
+            utr: utr,
+
+            registrationID: registrationID
+
+        })
 
     })
-    .then(response => response.json())
+
+    .then(response =>
+        response.json()
+    )
 
     .then(data => {
 
         if (data.success) {
 
-            document.getElementById("registrationId")
-                .innerText = registrationID;
+            document.getElementById(
+                "registrationId"
+            ).innerText =
+                registrationID;
 
-            document.getElementById("registrationForm")
-                .style.display = "none";
 
-            document.getElementById("success")
-                .style.display = "block";
+            if (coupon === "#VIP") {
+
+                document.getElementById(
+                    "successFee"
+                ).innerText =
+                    "💰 Registration Fee: FREE 🎉";
+
+            } else {
+
+                document.getElementById(
+                    "successFee"
+                ).innerText =
+                    "💰 Registration Fee: ₹6 per person";
+
+            }
+
+
+            document.getElementById(
+                "registrationForm"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "success"
+            ).style.display =
+                "block";
+
 
         } else {
 
-            alert("Registration save nahi hui. Please try again.");
+            alert(
+                "Registration save nahi hui. Please try again."
+            );
 
         }
 
@@ -390,13 +592,16 @@ function registerParty() {
 
         console.error(error);
 
-        alert("Registration save nahi hui. Please try again.");
+        alert(
+            "Registration save nahi hui. Please try again."
+        );
 
     });
 
 }
 
 </script>
+
 </body>
 
 </html>
