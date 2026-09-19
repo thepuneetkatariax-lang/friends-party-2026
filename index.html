@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Friends Party 2026</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            padding: 30px 15px;
+        }
+
+        .box {
+            max-width: 520px;
+            margin: auto;
+            background: white;
+            color: #222;
+            padding: 30px;
+            border-radius: 22px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            text-align: center;
+            color: #6a11cb;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555;
+        }
+
+        .info {
+            background: #f2f2f2;
+            padding: 18px;
+            border-radius: 14px;
+            margin: 20px 0;
+        }
+
+        .info p {
+            margin: 10px 0;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 9px;
+            font-size: 15px;
+        }
+
+        .payment {
+            margin-top: 22px;
+            padding: 20px;
+            background: #f7f7f7;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .qr {
+            width: 210px;
+            max-width: 100%;
+            margin: 15px auto;
+            display: block;
+        }
+
+        .upi {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 22px;
+            border: none;
+            border-radius: 11px;
+            background: #6a11cb;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .success {
+            display: none;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 55px;
+        }
+
+        .registration-id {
+            color: #6a11cb;
+            font-size: 23px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .small {
+            font-size: 13px;
+            color: #666;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <!-- REGISTRATION FORM -->
+
+    <div id="registrationForm">
+
+        <h1>🎉 Friends Party 2026 🎉</h1>
+
+        <p class="subtitle">
+            Get ready for an unforgettable party! 🥳
+        </p>
+
+        <div class="info">
+
+            <p>📅 <b>Date:</b> 20 September 2026</p>
+
+            <p>⏰ <b>Time:</b> Evening 5 PM</p>
+
+            <p>📍 <b>Venue:</b> Decide after group discussion</p>
+
+            <p>💰 <b>Registration Fee:</b> ₹6 per person</p>
+<p>💵 <b>Party Contribution:</b> ₹200 per person — Please bring it with you.</p>
+        </div>
+
+        <h2>🎟️ Party Registration</h2>
+
+        <label>👤 Full Name</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your full name"
+        >
+
+        <label>📱 Mobile Number</label>
+
+        <input
+            type="tel"
+            id="phone"
+            placeholder="Enter mobile number"
+        >
+
+        <label>👥 Number of People</label>
+
+        <select id="people">
+
+            <option value="">
+                Select number of people
+            </option>
+
+            <option value="1">1 Person</option>
+            <option value="2">2 People</option>
+            <option value="3">3 People</option>
+            <option value="4">4 People</option>
+            <option value="5">5 People</option>
+            <option value="6">6 People</option>
+
+        </select>
+
+        <label>🍕 Food Preference</label>
+
+        <select id="food">
+
+            <option value="Veg">
+                Veg
+            </option>
+
+            <option value="Non-Veg">
+                Non-Veg
+            </option>
+
+        </select>
+
+        <!-- PAYMENT -->
+
+        <div class="payment">
+
+            <h2>💳 Pay Registration Fee</h2>
+
+            <p>
+                Registration Fee:
+                <b>₹6 per person</b>
+            </p>
+
+            <p>
+                Scan the QR code below and pay ₹6.
+            </p>
+
+            <img
+                src="qr.jpg"
+                class="qr"
+                alt="UPI QR Code"
+            >
+
+            <p class="upi">
+                Scan & Pay ₹6
+            </p>
+
+            <p class="small">
+                After payment, enter your UTR / Transaction ID below.
+            </p>
+
+        </div>
+
+        <label>🔢 UTR / Transaction ID</label>
+
+        <input
+            type="text"
+            id="utr"
+            placeholder="Enter payment transaction ID"
+        >
+
+        <button onclick="registerParty()">
+            🎟️ REGISTER NOW — ₹6
+        </button>
+
+        <p class="small">
+            Please make the payment before submitting the registration.
+        </p>
+
+    </div>
+
+
+    <!-- SUCCESS PAGE -->
+
+    <div class="success" id="success">
+
+        <div class="success-icon">
+            🎊
+        </div>
+
+        <h2>
+            Registration Received!
+        </h2>
+
+        <p>
+            Welcome to Friends Party 2026 🥳
+        </p>
+
+        <p>
+            Your Registration ID:
+        </p>
+
+        <div
+            class="registration-id"
+            id="registrationId">
+        </div>
+
+        <p>
+            📅 20 September 2026
+        </p>
+
+        <p>
+            ⏰ Evening 5 PM
+        </p>
+
+        <p>
+            📍 Venue will be decided after group discussion.
+        </p>
+
+        <p>
+            💰 Registration Fee: ₹6 per person
+        </p>
+
+        <p class="small">
+            Your registration will be reviewed by the party organizer.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function registerParty() {
+
+    let name = document.getElementById("name").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let people = document.getElementById("people").value;
+    let food = document.getElementById("food").value;
+    let utr = document.getElementById("utr").value.trim();
+
+    if (name === "") {
+        alert("Please enter your name.");
+        return;
+    }
+
+    if (phone === "") {
+        alert("Please enter your mobile number.");
+        return;
+    }
+
+    if (people === "") {
+        alert("Please select number of people.");
+        return;
+    }
+
+    if (utr === "") {
+        alert("Please enter your UTR / Transaction ID.");
+        return;
+    }
+
+    let randomNumber =
+        Math.floor(100000 + Math.random() * 900000);
+
+    let registrationID =
+        "FP2026-" + randomNumber;
+
+   
+    let scriptURL = "https://script.google.com/macros/s/AKfycbzVFVwY4TBkch5_Kc4dnIimr8tlYebL856FvryB_Tjj-FzOIINioQxLs4unLdxSuBKOHg/exec";
+
+    fetch(scriptURL, {
+
+        method: "POST",
+
+    body: JSON.stringify({
+    action: "register",
+    name: name,
+    phone: phone,
+    people: people,
+    food: food,
+    utr: utr,
+    registrationID: registrationID
+})        
+
+    })
+    .then(response => response.json())
+
+    .then(data => {
+
+        if (data.success) {
+
+            document.getElementById("registrationId")
+                .innerText = registrationID;
+
+            document.getElementById("registrationForm")
+                .style.display = "none";
+
+            document.getElementById("success")
+                .style.display = "block";
+
+        } else {
+
+            alert("Registration save nahi hui. Please try again.");
+
+        }
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        alert("Registration save nahi hui. Please try again.");
+
+    });
+
+}
+
+</script>
+</body>
+
+</html>
